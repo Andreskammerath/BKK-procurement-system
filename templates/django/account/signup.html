@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}Registro{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh; padding: 2rem 0;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                        <h2 class="fw-bold">Crear Cuenta</h2>
+                        <p class="text-muted">Únete a COMPRAS-SOFT</p>
+                    </div>
+                    
+                    <form method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">
+                                <i class="fas fa-envelope me-1"></i>Email
+                            </label>
+                            <input 
+                                type="email" 
+                                class="form-control form-control-lg {% if form.email.errors %}is-invalid{% endif %}" 
+                                id="id_email" 
+                                name="email" 
+                                placeholder="usuario@ejemplo.com"
+                                value="{{ form.email.value|default:'' }}"
+                                required
+                                autofocus
+                            >
+                            {% if form.email.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                            <small class="form-text text-muted">Este será tu nombre de usuario</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_password1" class="form-label">
+                                <i class="fas fa-lock me-1"></i>Contraseña
+                            </label>
+                            <input 
+                                type="password" 
+                                class="form-control form-control-lg {% if form.password1.errors %}is-invalid{% endif %}" 
+                                id="id_password1" 
+                                name="password1" 
+                                placeholder="••••••••"
+                                required
+                            >
+                            {% if form.password1.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.password1.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="id_password2" class="form-label">
+                                <i class="fas fa-lock me-1"></i>Confirmar Contraseña
+                            </label>
+                            <input 
+                                type="password" 
+                                class="form-control form-control-lg {% if form.password2.errors %}is-invalid{% endif %}" 
+                                id="id_password2" 
+                                name="password2" 
+                                placeholder="••••••••"
+                                required
+                            >
+                            {% if form.password2.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.password2.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+                            </button>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="text-center">
+                            <small class="text-muted">
+                                ¿Ya tienes cuenta? 
+                                <a href="{% url 'account_login' %}" class="text-decoration-none">
+                                    Inicia sesión aquí
+                                </a>
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 text-white">
+                <small>&copy; 2025 BKK Procurement System</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

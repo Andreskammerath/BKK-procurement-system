@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema de Compras{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mt-4 mb-4">
+                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            </h1>
+        </div>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-white-75 small">Proveedores Activos</div>
+                            <div class="h2 mb-0">0</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-truck fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/core/proveedor/">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-white-75 small">Clientes</div>
+                            <div class="h2 mb-0">0</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-users fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/core/cliente/">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-warning text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-white-75 small">Cotizaciones Pendientes</div>
+                            <div class="h2 mb-0">0</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-file-invoice-dollar fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/procurement/cotizacion/">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-info text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-white-75 small">Órdenes en Proceso</div>
+                            <div class="h2 mb-0">0</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-shopping-cart fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/procurement/ordencompraproveedor/">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-bolt me-2"></i>Acciones Rápidas
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="/admin/procurement/solped/add/" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-plus-circle me-2"></i>Nueva Solped
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="/admin/procurement/cotizacion/add/" class="btn btn-outline-success w-100">
+                                <i class="fas fa-file-invoice me-2"></i>Nueva Cotización
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="/admin/core/proveedor/add/" class="btn btn-outline-info w-100">
+                                <i class="fas fa-truck me-2"></i>Nuevo Proveedor
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="/admin/core/cliente/add/" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-user-plus me-2"></i>Nuevo Cliente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Welcome Message -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle me-2"></i>Bienvenido al Sistema de Compras
+                </div>
+                <div class="card-body">
+                    <h5>Hola, {{ user.email }}!</h5>
+                    <p>Tu rol actual es: <strong>{{ user.get_rol_display() }}</strong></p>
+                    <hr>
+                    <p class="mb-0">
+                        Este es tu panel de control central. Desde aquí puedes acceder a todas las funcionalidades
+                        del sistema de gestión de compras. Utiliza el menú superior para navegar o el panel de
+                        administración para gestionar los datos.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-link me-2"></i>Enlaces Rápidos
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <a href="/admin/" class="text-decoration-none">
+                                <i class="fas fa-cog me-2"></i>Panel de Administración
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/admin/core/articulo/" class="text-decoration-none">
+                                <i class="fas fa-box me-2"></i>Catálogo de Artículos
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/admin/procurement/actividad/" class="text-decoration-none">
+                                <i class="fas fa-history me-2"></i>Registro de Actividades
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="http://localhost:5555" target="_blank" class="text-decoration-none">
+                                <i class="fas fa-tasks me-2"></i>Monitor Celery (Flower)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
